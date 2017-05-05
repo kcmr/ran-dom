@@ -1,0 +1,109 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`<ran-dom>` allows to get a random item from an Array passed as `items` property.
+
+Example:
+
+```html
+<ran-dom
+  items='["uno", "dos", "tres", "catorce"]'
+  result="{{result}}">
+</ran-dom>
+```
+## Getting random result
+
+The random result can be get in three ways and it's always binded to the `result` property:
+
+- By calling `getRandom()` method.
+- By placing a clickable element with `random` attribute in component's light DOM that will call `getRandom()` method when clicked.
+- By adding the `randomize` boolean attribute.
+
+Examples:
+```html
+<ran-dom
+  items='["uno", "dos", "tres", "catorce"]'
+  result="{{result}}">
+  <span>[[result]]</span>
+  <button random>Get random item!</button>
+</ran-dom>
+```
+
+```html
+<ran-dom randomize
+  items='["uno", "dos", "tres", "catorce"]'
+  result="{{result}}">
+  <span>[[result]]</span>
+</ran-dom>
+```
+
+@demo demo/index.html
+-->
+
+<dom-module id="ran-dom">
+  <template>
+    <style>
+      :host{ display: block; }
+      :host([hidden]) { display: none; }
+    </style>
+    <content></content>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'ran-dom',
+
+      properties: {
+        /**
+         * List of items used to get a random value.
+         */
+        items: Array,
+
+        /**
+         * Random value from `items` array.
+         */
+        result: {
+          type: String,
+          notify: true,
+          readOnly: true
+        },
+
+        /**
+         * Set to true to set `result` property.
+         */
+        randomize: {
+          type: Boolean,
+          value: false
+        }
+      },
+
+      observers: [
+        '_randomizeChanged(items, randomize)'
+      ],
+
+      listeners: {
+        'click': '_onClick'
+      },
+
+      /**
+       * Gets a random item from `items` property.
+       */
+      getRandom: function() {
+        this._setResult(this.items[Math.floor(Math.random() * this.items.length)]);
+      },
+
+      _randomizeChanged: function(items, randomize) {
+        if (randomize) {
+          this.getRandom();
+        }
+      },
+
+      _onClick: function(e) {
+        var target = Polymer.dom(e).localTarget;
+        if (target && target.hasAttribute('random')) {
+          this.getRandom();
+        }
+      }
+    });
+  </script>
+</dom-module>

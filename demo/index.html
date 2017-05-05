@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>ran-dom Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../paper-ripple/paper-ripple.html">
+    <link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="demo-icons.html">
+    <link rel="import" href="../ran-dom.html">
+    <link rel="stylesheet" href="styles.css">
+    <script src="colors.js"></script>
+  </head>
+  <body unresolved>
+    <template is="dom-bind" id="demo">
+      <ran-dom class="form" randomize items="[[colors]]" result="{{color}}" on-result-changed="changeColor">
+        <div class="result">[[color]]</div>
+        <paper-icon-button class="button" icon="icons:loop" alt="Give me a random galaxy!" random noink></paper-icon-button>
+      </ran-dom>
+      <paper-ripple></paper-ripple>
+    </template>
+    <script>
+      document.addEventListener('WebComponentsReady', function() {
+        var demo = document.getElementById('demo');
+        demo.changeColor = function(e) {
+          document.body.style.setProperty('--body-background-color', e.detail.value);
+        };
+        demo.colors = namedColors;
+      });
+    </script>
+  </body>
+</html>

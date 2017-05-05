@@ -1,0 +1,27 @@
+{
+  "name": "ran-dom",
+  "version": "0.1.0",
+  "authors": [
+    "Kus Cámara"
+  ],
+  "description": "An element providing a solution to no problem in particular.",
+  "keywords": [
+    "web-component",
+    "polymer",
+    "random"
+  ],
+  "main": "ran-dom.html",
+  "homepage": "https://github.com/kcmr/ran-dom/",
+  "ignore": [],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.6",
+    "paper-ripple": "PolymerElements/paper-ripple#^1.0.10",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.13",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^1.1.6"
+  }
+}

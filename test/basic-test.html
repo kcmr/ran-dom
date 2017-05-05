@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../ran-dom.html">
+</head>
+
+<body>
+  <test-fixture id="default">
+    <template>
+      <ran-dom items='["uno", "dos", "tres", "catorce"]'>
+        <button random>Gets random</button>
+        <button>Does nothing</button>
+      </ran-dom>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('<ran-dom> tag', function() {
+      var el;
+
+      setup(function() {
+        el = fixture('default');
+      });
+
+      test('calling getRandom() method sets "result" property to an item of the "items" property', function() {
+        sinon.spy(el, 'fire');
+        el.getRandom();
+        assert.isTrue(el.items.indexOf(el.result) !== -1);
+        assert.isTrue(el.fire.calledWith('result-changed'), '"result" property is notifiable');
+      });
+
+      test('clicking on a button in light DOM with "random" attribute calls getRandom() method', function() {
+        var btn = el.querySelector('button[random]');
+        sinon.spy(el, 'getRandom');
+        btn.click();
+        assert.isTrue(el.getRandom.calledOnce);
+      });
+
+      test('clicking on a button in light DOM without "random" attribute does not call getRandom() method', function() {
+        var btn = el.querySelector('button:not([random])');
+        sinon.spy(el, 'getRandom');
+        btn.click();
+        assert.isFalse(el.getRandom.called);
+      });
+
+      test('setting "randomize" to true sets "result" property to an item of the "items" property', function() {
+        el.randomize = true;
+        assert.isTrue(el.items.indexOf(el.result) !== -1);
+      });
+    });
+  </script>
+</body>
+
+</html>
