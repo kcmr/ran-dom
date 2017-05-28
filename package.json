@@ -1,0 +1,23 @@
+{
+  "name": "ran-dom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kcmr/ran-dom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kcmr/ran-dom/issues"
+  },
+  "homepage": "https://github.com/kcmr/ran-dom#readme",
+  "dependencies": {
+    "slim-js": "^2.9.8"
+  }
+}
